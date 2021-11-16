@@ -1,0 +1,160 @@
+---
+  - hosts: all
+    become: yes
+    tasks:
+      - name: apt-get update as a separate step
+        apt:
+          update_cache: yes
+
+      - name: Upgrade the OS (apt-get dist-upgrade/full/safe)
+        apt:
+          upgrade: safe
+
+      - name: Ensure various tools are installed by apt
+        apt:
+          name:
+            - keepassxc
+            - torbrowser-launcher
+            - kazam
+            - audacity
+            - openjdk-11-jre
+            - ripgrep
+            - p7zip
+            - unrar
+            - openshot
+            - vlc
+            - python3
+            - python-setuptools
+            - jq
+            - python3-pip
+            - git
+            - curl
+            - wget
+            - webhttrack
+            - ffmpeg
+            - mediainfo-gui
+            - libimage-exiftool-perl
+          state: present
+
+      - name: Install youtube_dl, Instaloader and Instalooter with pip
+        pip:
+          name:
+            - youtube_dl
+            - Instalooter
+            - Instaloader
+            - pipenv
+
+      - name: Install Amass
+        snap:
+          name: amass
+
+      - name: Git Twint
+        ansible.builtin.git:
+          repo: 'https://github.com/twintproject/twint.git'
+          dest: '/src/twint'
+
+      - name: Install Twint requirements
+        pip:
+          requirements: '/src/twint/requirements.txt'
+
+      - name: Install Twint
+        pip:
+          name: '/src/twint'
+
+      # - name: Passing on eyewitness
+
+      - name: Git sublist3r
+        ansible.builtin.git:
+          repo: 'https://github.com/aboul3la/Sublist3r.git'
+          dest: '/src/sublist3r'
+
+      - name: Install sublist3r requirements
+        pip:
+          requirements: '/src/sublist3r/requirements.txt'
+
+      - name: Git Photon
+        ansible.builtin.git:
+          repo: 'https://github.com/s0md3v/Photon.git'
+          dest: '/src/photon'
+
+      - name: Install Photon requirements
+        pip:
+          requirements: '/src/photon/requirements.txt'
+
+      - name: Git The Harvester
+        ansible.builtin.git:
+          repo: 'https://github.com/laramies/theHarvester.git'
+          dest: '/src/theharvester'
+
+      - name: Install The Harvester requirements
+        pip:
+          requirements: '/src/theharvester/requirements.txt'
+
+      - name: Git metagoofil
+        ansible.builtin.git:
+          repo: 'https://github.com/opsdisk/metagoofil.git'
+          dest: '/src/metagoofil'
+
+      - name: Install metagoofil requirements
+        pip:
+          requirements: '/src/metagoofil/requirements.txt'
+
+      - name: Git recon-ng
+        ansible.builtin.git:
+          repo: 'https://github.com/lanmaster53/recon-ng.git'
+          dest: '/src/recon-ng'
+
+      - name: Install recon-ng requirements
+        pip:
+          requirements: '/src/recon-ng/REQUIREMENTS'
+
+      - name: Git sherlock
+        ansible.builtin.git:
+          repo: 'https://github.com/sherlock-project/sherlock.git'
+          dest: '/src/sherlock'
+
+      - name: Install sherlock requirements
+        pip:
+          requirements: '/src/sherlock/requirements.txt'
+
+      - name: Git spiderfoot
+        ansible.builtin.git:
+          repo: 'https://github.com/smicallef/spiderfoot.git'
+          dest: '/src/spiderfoot'
+
+      - name: Install spiderfoot requirements
+        pip:
+          requirements: '/src/spiderfoot/requirements.txt'
+
+
+#      - name: Clean up spiderfoot shell script
+#        replace:
+#          path: ''
+#          regexp: ''
+#          replace: ''
+#          backup: yes
+
+      - name: Git spiderfoot
+        ansible.builtin.git:
+          repo: 'https://github.com/AmIJesse/Elasticsearch-Crawler.git'
+          dest: 'src/Elasticsearch-Crawler'
+
+      - name: Install nested-lookup, internetarchive with pip
+        pip:
+          name:
+            - nested-lookup
+            - internetarchive
+            - holehe
+
+      # - name: Ensure ripgrep installed by apt
+      #   apt:
+      #     pkg: ripgrep
+
+# https://github.com/Und3rf10w/kali-anonsurf.git
+# https://github.com/AzizKpln/Moriarty-Project
+# https://github.com/soxoj/maigret
+# Google Earth
+
+      - name: Installing Maltego v4.2.19
+        apt:
+          deb: 'https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.19.13940.deb'
